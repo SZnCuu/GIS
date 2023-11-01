@@ -42,7 +42,7 @@ GIIdata <- data_all %>%
   mutate(diff_19_10 = case_when(GII_19_10>0 ~ "GII has risen",
                                 GII_19_10<0 ~ "GII has declined",
                                 GII_19_10==0 ~ "GII has not changed")) %>%
-  mutate(iso2 = countrycode(GIIdata$iso3,origin = 'iso3c',destination = 'iso2c')) 
+  mutate(iso2 = countrycode(iso3,origin = 'iso3c',destination = 'iso2c')) 
 
 missing_value <- is.na(GIIdata$iso2)
 GIIdata_clean <- GIIdata[!missing_value,]
@@ -54,7 +54,7 @@ GIIdata_clean <- GIIdata[!missing_value,]
 ```{r}
 
 world_shape_new <- world_shape %>%
-  left_join(.,GIIdata_clean,by=c("AFF_ISO"="iso2"))
+  left_join(.,GIIdata_clean,by=c("ISO"="iso2"))
 
 ```
 
